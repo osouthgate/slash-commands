@@ -14,6 +14,7 @@ A curated collection of AI-powered slash commands for code review, problem analy
 🐛 `/problem-analyzer` - Identify bugs and affected files  
 ♻️ `/refactor-code` - Start refactoring workflows  
 🔌 `/kill-port` - Kill processes running on specific ports  
+🔎 `/research-better-lib` - Find modern, faster library alternatives  
 
 ## Installation
 
@@ -132,6 +133,25 @@ Kills processes running on specified ports with OS-specific commands and safety 
 /kill-port "3000"
 
 /kill-port "3000 8080 9000"
+```
+
+### 6. `research-better-lib`
+A comprehensive template for evaluating alternatives to baseline libraries. Helps find modern, faster JavaScript/TypeScript libraries that outperform existing solutions in latency and bundle size while maintaining or improving relevance/quality.
+
+**Features**:
+- Structured problem statement and success metrics
+- Search query templates for benchmarking
+- Candidate library shortlist evaluation
+- Minimal benchmark design guidelines
+- Decision rubric and deliverables checklist
+
+**Usage**: `/research-better-lib "<baseline-library> <domain/use-case> <candidate-libraries>"`
+
+**Examples**:
+```
+/research-better-lib "Fuse.js fuzzy search fuzzysort quick-score FlexSearch MiniSearch"
+
+/research-better-lib "lodash utility functions ramda remeda"
 ```
 
 ## Workflow Tips
