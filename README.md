@@ -15,6 +15,9 @@ A curated collection of AI-powered slash commands for code review, problem analy
 ♻️ `/refactor-code` - Start refactoring workflows  
 🔌 `/kill-port` - Kill processes running on specific ports  
 🔎 `/research-better-lib` - Find modern, faster library alternatives  
+🤖 `/ask-gpt-pro-browser` - Ask GPT-5 Pro via browser (no API key)  
+🌐 `/ask-gpt-pro-api` - Ask GPT-5 Pro via API  
+🎬 `/ask-pro-directors-cut` - Use Cursor Agent + codefetch + GPT-5 Pro  
 
 ## Installation
 
@@ -154,12 +157,60 @@ A comprehensive template for evaluating alternatives to baseline libraries. Help
 /research-better-lib "lodash utility functions ramda remeda"
 ```
 
+### 7. `ask-gpt-pro-browser` & `ask-gpt-pro-api`
+Query GPT-5 Pro with codebase context using codefetch. These commands help you ask complex questions about your codebase with full context.
+
+**`ask-gpt-pro-browser`**: Uses browser automation (no API key required, macOS + Chrome)
+- Research codebase to identify relevant files/directories
+- Generate context with codefetch (50k token limit)
+- Query GPT-5 Pro via browser engine
+
+**`ask-gpt-pro-api`**: Uses OpenAI API (requires OPENAI_API_KEY)
+- Same workflow as browser version
+- Requires API key for authentication
+
+**Usage**: `/ask-gpt-pro-browser PROMPT="<your-question>"` or `/ask-gpt-pro-api PROMPT="<your-question>"`
+
+**Examples**:
+```
+/prompts:ask-gpt-pro-browser PROMPT="Review the authentication logic for security issues"
+
+/prompts:ask-gpt-pro-api PROMPT="Explain how the caching layer works"
+```
+
+### 8. `ask-pro-directors-cut`
+Advanced workflow that combines Cursor Agent (composer-1), codefetch, and GPT-5 Pro for comprehensive codebase analysis. Uses intelligent context discovery before querying GPT-5 Pro.
+
+**Workflow**:
+1. Cursor Agent analyzes codebase and identifies affected files
+2. Extract file patterns from analysis
+3. Generate context with codefetch using identified files
+4. Query GPT-5 Pro with detailed analysis
+
+**Features**:
+- Intelligent file discovery via Cursor Agent
+- Detailed problem summary and affected files
+- Full context passed to GPT-5 Pro
+- No API key required (browser engine)
+
+**Usage**: `/ask-pro-directors-cut PROMPT="<your-question>"`
+
+**Examples**:
+```
+/prompts:ask-pro-directors-cut PROMPT="Analyze the performance bottlenecks in the authentication system"
+
+/prompts:ask-pro-directors-cut PROMPT="Review the error handling patterns across the codebase"
+```
+
 ## Workflow Tips
 
 - Use `code-review-low` after implementing features for quick validation
 - Use `code-review-high` for major changes or before releases
 - Combine `problem-analyzer` with debugging sessions for faster issue resolution
 - Use `plan-review` before starting complex implementations
+- Use `ask-pro-directors-cut` for deep codebase analysis with intelligent context gathering
+- Use `ask-gpt-pro-browser` for quick questions without API keys (macOS + Chrome)
+- Use `ask-gpt-pro-api` when you need API-based access to GPT-5 Pro
 
 ## Links
 
