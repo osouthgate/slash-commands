@@ -3,6 +3,10 @@ description: Finalize a completed task with status summary and move to finished 
 argument-hint: TASK_FILE=<path-to-task.md>
 ---
 
+<task>
+$TASK
+</task>
+
 # Finalize Task / Plan (slash command)
 
 Goal: close a task while keeping a lightweight summary for fast AI ingestion.

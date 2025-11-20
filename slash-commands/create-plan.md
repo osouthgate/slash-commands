@@ -3,6 +3,10 @@ description: Create a comprehensive task plan with context, success criteria, ap
 argument-hint: TASK=<task-description-or-goal>
 ---
 
+<task>
+$TASK
+</task>
+
 # Create Plan (slash command)
 
 Goal: draft a full task plan in `docs/tasks/todo/<XX>-<name>.md`.
