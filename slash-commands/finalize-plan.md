@@ -1,22 +1,23 @@
 ---
-description: Finalize a completed task or plan with status, summary, and affected files
+description: Finalize a completed task with status summary and move to finished directory
 argument-hint: TASK_FILE=<path-to-task.md>
 ---
 
 # Finalize Task / Plan (slash command)
 
-Use this template whenever a task is completed and needs to be closed out & moved into `docs/tasks/finished/`.
+Goal: close a task while keeping a lightweight summary for fast AI ingestion.
 
-Fields to fill:
-- Status: short, date-stamped completion note.
-- Summary of work delivered: bullet list of the key changes/decisions and validations (tests/builds).
-- Affected files: paths (one per line) for traceability.
-- Follow-up (optional): anything still pending or nice-to-have.
-- Move instruction: rename the original task file to `docs/tasks/finished/<XX>-DONE-<name>.md`.
+What to do (two artifacts):
+1) Move the original task plan to `docs/tasks/finished/<XX>-DONE-<name>.md`.
+   - Add a one-line status at the top: `Status: Done — implemented on <YYYY-MM-DD>`.
+   - Add a pointer line: `Summary: see docs/tasks/summaries/<XX>-SOW-<name>.md`.
+2) Create a short summary file at `docs/tasks/summaries/<XX>-SOW-<name>.md`.
+   - Include status, concise bullets of work delivered, tests/builds, and affected files.
+   - Add a pointer line back to the plan: `Plan: docs/tasks/finished/<XX>-DONE-<name>.md`.
 
-Suggested prompt body:
+Suggested prompt template:
 ```
-Status: Done — implemented on <YYYY-MM-DD>.
+Status: Done — implemented on <YYYY-MM-DD>
 Summary of work delivered
 - <bullet 1>
 - <bullet 2>
@@ -28,10 +29,12 @@ Affected files
 - <path3>
 Follow-up
 - <optional next steps or “None”>
+Plan
+- docs/tasks/finished/<XX>-DONE-<name>.md
 ```
 
 Guidelines:
-- Keep it brief (story-ticket style).
-- Use absolute or repo-relative paths.
+- Keep the summary minimal (token-friendly). Use repo-relative paths.
 - If tests/builds weren’t run, state why.
-- If anything was intentionally left unchanged, call it out in Summary or Follow-up.
+- If anything intentionally left unchanged, note it in Summary or Follow-up.
+- Always ensure the two files cross-reference each other.

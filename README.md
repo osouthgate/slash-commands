@@ -8,7 +8,9 @@ A curated collection of AI-powered slash commands for code review, problem analy
 
 ## Quick Reference
 
+📝 `/create-plan` - Create comprehensive task plans  
 📋 `/plan-review` - Review implementation plans  
+✅ `/finalize-plan` - Finalize completed tasks  
 🔍 `/code-review-low` - Fast code review  
 🔬 `/code-review-high` - Thorough code review  
 🐛 `/problem-analyzer` - Identify bugs and affected files  
@@ -50,7 +52,27 @@ mkdir -p ~/.claude/commands
 
 ## Commands
 
-### 1. `plan-review`
+### 1. `create-plan`
+Creates a comprehensive task plan with structured sections for context, success criteria, deliverables, approach, risks, and testing. Ensures plans follow best practices and include all necessary information before implementation.
+
+**Features**:
+- Structured plan template with all required sections
+- Context and problem statement
+- Measurable success criteria
+- Clear deliverables and approach
+- Risk assessment and testing strategy
+- Cross-references to AGENTS.md for rules/constraints
+
+**Usage**: `/create-plan TASK="<task-description-or-goal>"`
+
+**Examples**:
+```
+/prompts:create-plan TASK="Implement user authentication system"
+
+/prompts:create-plan TASK="Refactor the payment processing module"
+```
+
+### 2. `plan-review`
 Reviews implementation plans and provides a go/no-go decision for development. Evaluates:
 - Codebase alignment and current patterns
 - Scope clarity and completeness
@@ -66,7 +88,26 @@ Reviews implementation plans and provides a go/no-go decision for development. E
 /plan-review "Here is the plan we want to implement: @my-plan.md"
 ```
 
-### 2. `code-review-low` & `code-review-high`
+### 3. `finalize-plan`
+Finalizes a completed task by creating two artifacts: a finished plan file and a lightweight summary for fast AI ingestion. Maintains traceability while keeping summaries token-friendly.
+
+**Features**:
+- Moves task to finished directory with status
+- Creates lightweight summary file (SOW - Summary of Work)
+- Cross-references between plan and summary
+- Tracks affected files, tests, and decisions
+- Token-optimized for AI consumption
+
+**Usage**: `/finalize-plan TASK_FILE="<path-to-task.md>"`
+
+**Examples**:
+```
+/prompts:finalize-plan TASK_FILE="docs/tasks/todo/01-user-auth.md"
+
+/prompts:finalize-plan TASK_FILE="docs/tasks/todo/05-payment-refactor.md"
+```
+
+### 4. `code-review-low` & `code-review-high`
 Comprehensive code review commands for post-implementation analysis.
 
 **`code-review-low`**: Fast review focusing on critical issues
@@ -89,7 +130,7 @@ Comprehensive code review commands for post-implementation analysis.
 /code-review-low "@auth.server.ts @auth.rs @auth.connector.ts"
 ```
 
-### 3. `problem-analyzer`
+### 5. `problem-analyzer`
 Identifies bugs and maps affected files across the codebase. Provides:
 - Root cause analysis
 - File impact assessment
@@ -109,7 +150,7 @@ I ran this often with cheeta model to get a quick analysis and move over to gpt 
 /problem-analyzer "we have a serious blocking bug in @user-form.ts and @user.service.ts"
 ```
 
-### 4. `refactor-code`
+### 6. `refactor-code`
 Initiates refactoring workflows with clear scope and isolation:
 - Feature-specific refactoring
 - Commit isolation guidelines
@@ -122,7 +163,7 @@ Initiates refactoring workflows with clear scope and isolation:
 /refactor-code "here is our implementation plan @impl-plan lets start"
 ```
 
-### 5. `kill-port`
+### 7. `kill-port`
 Kills processes running on specified ports with OS-specific commands and safety checks:
 - Cross-platform support (macOS, Linux, Windows)
 - Process identification and verification
@@ -138,7 +179,7 @@ Kills processes running on specified ports with OS-specific commands and safety 
 /kill-port "3000 8080 9000"
 ```
 
-### 6. `research-better-lib`
+### 8. `research-better-lib`
 A comprehensive template for evaluating alternatives to baseline libraries. Helps find modern, faster JavaScript/TypeScript libraries that outperform existing solutions in latency and bundle size while maintaining or improving relevance/quality.
 
 **Features**:
@@ -157,7 +198,7 @@ A comprehensive template for evaluating alternatives to baseline libraries. Help
 /research-better-lib "lodash utility functions ramda remeda"
 ```
 
-### 7. `ask-gpt-pro-browser` & `ask-gpt-pro-api`
+### 9. `ask-gpt-pro-browser` & `ask-gpt-pro-api`
 Query GPT-5 Pro with codebase context using codefetch. These commands help you ask complex questions about your codebase with full context.
 
 **`ask-gpt-pro-browser`**: Uses browser automation (no API key required, macOS + Chrome)
@@ -178,7 +219,7 @@ Query GPT-5 Pro with codebase context using codefetch. These commands help you a
 /prompts:ask-gpt-pro-api PROMPT="Explain how the caching layer works"
 ```
 
-### 8. `ask-pro-directors-cut`
+### 10. `ask-pro-directors-cut`
 Advanced workflow that combines Cursor Agent (composer-1), codefetch, and GPT-5 Pro for comprehensive codebase analysis. Uses intelligent context discovery before querying GPT-5 Pro.
 
 **Workflow**:
@@ -204,10 +245,12 @@ Advanced workflow that combines Cursor Agent (composer-1), codefetch, and GPT-5 
 
 ## Workflow Tips
 
+- Use `create-plan` at the start of new tasks to ensure comprehensive planning
+- Use `plan-review` before starting complex implementations
+- Use `finalize-plan` when tasks are completed to maintain organized documentation
 - Use `code-review-low` after implementing features for quick validation
 - Use `code-review-high` for major changes or before releases
 - Combine `problem-analyzer` with debugging sessions for faster issue resolution
-- Use `plan-review` before starting complex implementations
 - Use `ask-pro-directors-cut` for deep codebase analysis with intelligent context gathering
 - Use `ask-gpt-pro-browser` for quick questions without API keys (macOS + Chrome)
 - Use `ask-gpt-pro-api` when you need API-based access to GPT-5 Pro
