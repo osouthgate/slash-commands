@@ -26,20 +26,17 @@ argument-hint: PROMPT="<your question or task>"
 npx codefetch --max-tokens 50000 \
   --output codefetch/codebase.md \
   --token-encoder o200k \
-  --disable-line-numbers \
   --project-tree 3 \
+  --disable-line-numbers \
   --include-files "src/auth/**/*,src/api/**/*" \
   --include-dir "src/utils"
 
 # 2) Ask Oracle via Browser (no API key; macOS + Chrome)
 npx -y @steipete/oracle --engine browser -m gpt-5.1-pro \
   -p "$PROMPT" \
-  --file codefetch/codebase.md \
-  --browser-chrome-profile "Profile 3"
+  --file codefetch/codebase.md
 
 # Optional helpers:
 #   --files-report       # print per-file token usage
 #   --preview            # inspect the bundle before sending
 ```
-
-
